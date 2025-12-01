@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Kelebihan Caesar Cipher</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tema Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#4F46E5', // Indigo 600
+                        'secondary': '#818CF8', // Indigo 400
+                        'background': '#F9FAFB', // Gray 50
+                        'card': '#FFFFFF',
+                        'accent': '#FBBF24', // Amber 400
+                        'success': '#10B981', // Emerald 500 (Good)
+                        'warning': '#F59E0B', // Amber 500
+                        'danger': '#EF4444', // Red 500 (Bad)
+                        'info': '#3B82F6', // Blue 500 (Alternative)
+                        'purple': '#7C3Aed', // Violet 600 (Alternative)
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mengatur font utama */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Gaya tambahan untuk penekanan teks */
+        .highlight-bold {
+            font-weight: 700;
+            color: #1F2937; /* Gray 800 */
+        }
+        .highlight-accent {
+            font-weight: 700;
+            color: #FBBF24; /* Accent color */
+        }
+        .highlight-danger {
+            font-weight: 700;
+            color: #EF4444; /* Red 500 */
+        }
+        /* Gaya untuk daftar referensi */
+        .reference-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .reference-list li {
+            margin-bottom: 0.5rem;
+            text-indent: -2em;
+            padding-left: 2em;
+        }
+        /* Gaya spesifik untuk tabel manual */
+        .manual-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .manual-table th, .manual-table td {
+            border: 1px solid #E5E7EB; /* Gray 200 */
+            padding: 0.3rem 0.1rem;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem; /* Ukuran font kecil untuk banyak kolom */
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .manual-table th {
+            background-color: #F3F4F6; /* Gray 100 */
+            font-weight: 600;
+        }
+        .manual-table .key-row {
+            background-color: #E0E7FF; /* Indigo 100 */
+            font-weight: 700;
+            color: #4338CA; /* Indigo 700 */
+        }
+    </style>
+</head>
+<body class="bg-background font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="bg-primary shadow-2xl sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                Analisis Kelebihan Kriptografi Caesar Cipher
+            </h1>
+            <p class="text-secondary text-sm mt-1">Studi Berdasarkan Dokumen Kelompok 4</p>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Bagian I. Kecepatan dan Efisiensi -->
+        <section id="kecepatan-efisiensi" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-primary pb-2">
+                I. Kecepatan dan Efisiensi
+            </h2>
+            
+            <p class="text-gray-700 mb-6 italic">
+                Caesar Cipher memproses setiap huruf satu per satu sehingga waktu yang dibutuhkan bertambah sebanding dengan panjang pesan. Secara praktis Caesar Cipher sangat cepat untuk enkripsi maupun deskripsi baik dilakukan secara manual ataupun komputer. (Ningsih, Salsabila, Hutapea, Santika, & Gunawan, 2024)
+            </p>
+
+            <!-- Grid 2x2 untuk 4 sub-bagian -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <!-- Kartu 1: Komputasi/Kecepatan Dasar (Hijau) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-success transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-success mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Komputasi / Kecepatan Dasar
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 mt-3 text-gray-700">
+                        <li>Implementasi Caesar melakukan <strong class="highlight-bold">satu operasi sederhana</strong> untuk setiap karakter.</li>
+                        <li><strong class="highlight-bold">Time Complexity:</strong> Berskala <em class="text-success font-semibold">linear $O(n)$</em> terhadap panjang teks, yang berarti sangat cepat.</li>
+                        <li>Implementasi komputer sangat cepat bahkan pada pesan panjang.</li>
+                    </ul>
+                </div>
+
+                <!-- Kartu 2: Penggunaan Memori (Biru) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-info transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-info mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v3a2 2 0 01-2 2M5 12a2 2 0 00-2 2v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+                        Penggunaan Memori (Space)
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 mt-3 text-gray-700">
+                        <li>Memori tambahan yang diperlukan <strong class="highlight-accent">minimal</strong>.</li>
+                        <li>Hanya memerlukan <em>buffer output</em> dan beberapa variabel konstan.</li>
+                        <li>Konsumsi memori sangat kecil sehingga <strong class="highlight-bold">cocok untuk perangkat terbatas</strong> (Hernandez, 2022) .</li>
+                    </ul>
+                </div>
+                
+                <!-- Kartu 3: Efisiensi Keamanan / Ukuran Ruang Kunci (Ungu) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-purple transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-purple mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v3"></path></svg>
+                        Efisiensi Keamanan / Ukuran Ruang Kunci (Keyspace)
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 mt-3 text-gray-700">
+                        <li>Pada alfabet biasa, hanya ada <strong class="highlight-danger">26 kemungkinan pergeseran</strong> (kunci 0–25).</li>
+                        <li>Kunci efektif yang digunakan hanya <strong class="highlight-danger">25</strong> (kunci 0 dianggap identitas).</li>
+                        <li>Karena ruang kunci sangat kecil, serangan <em class="highlight-bold">brute force</em> (mencoba semua kunci) praktis <strong class="highlight-danger">instan</strong>.</li>
+                    </ul>
+                </div>
+                
+                <!-- Kartu 4: Analisis Frekuensi dan Modifikasi (Merah) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-danger transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-danger mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v14L9 19zm0 0v-4M21 3v14l-12 3V6l12-3z"></path></svg>
+                        Analisis Frekuensi dan Modifikasi
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 mt-3 text-gray-700">
+                        <li>Caesar adalah <strong class="highlight-bold">monoalfabetik</strong>, yang berarti distribusi huruf dalam teks terenkripsi hanya bergeser.</li>
+                        <li>Analisis frekuensi dapat mengungkap pergeseran dengan mudah, yang menjadi <strong class="highlight-danger">kelemahan fatal</strong>.</li>
+                        <li>Untuk meningkatkan keamanan, diperlukan <strong class="highlight-bold">modifikasi</strong> yang mengubah sifat monoalfabetik.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ringkasan yang Diperbarui -->
+            <div class="mt-8 p-4 bg-primary/10 border-l-4 border-primary rounded-lg text-gray-800 font-medium">
+                <span class="font-semibold text-primary">Ringkasan:</span> Dengan begitu dapat disimpulkan bahwa jika tujuan dari semua ini adalah <strong class="text-success">kecepatan dan kesederhanaan</strong> Caesar sangat efisien dan cepat akan tetapi jika tujuannya adalah untuk <em class="highlight-danger">keamanan</em> maka efisiensinya buruk, modifikasi kecil tidak cukup, perlindungan nyata membutuhkan algoritma dengan ruang kunci jauh lebih besar atau metode polialfabetik.
+            </div>
+        </section>
+
+        <!-- Bagian II. Kesederhanaan Algoritma -->
+        <section id="kesederhanaan-edukasi" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-primary pb-2">
+                II. Kesederhanaan Algoritma
+            </h2>
+
+            <p class="text-gray-700 italic mb-6">
+                Caesar Cipher sangat sederhana secara konsep dan implementasi. Algoritma ini tidak memerlukan perhitungan kompleks sehingga mudah dipahami bahkan oleh pemula (Asiani & Yanti, 2022). Singh (1999) juga menegaskan bahwa kesederhanaan inilah yang menjadikannya sebagai alat pengantar kriptografi yang efektif sepanjang sejarah.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <!-- Kartu 1: Konsep Matematis Sederhana (Warna Biru) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-info transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-info mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 7h2m-2 2h2M17 7h2m-2 2h2M3 13h2m-2 2h2M19 13h2m-2 2h2M12 5v2M12 17v2M12 11v2m-1-2h2m-2 4h2M12 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zm-4 7a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zm8 0a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1z"></path></svg>
+                        Konsep Matematis Sederhana
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Dasar Caesar Cipher adalah operasi <strong class="highlight-bold">aritmetika modular</strong> pada indeks huruf: 
+                    </p>
+                    <div class="bg-gray-100 p-3 rounded font-mono text-lg text-gray-800 overflow-x-auto border border-gray-300 mb-4">
+                        <p class="text-left mb-1"><strong class="text-indigo-600">Enkripsi:</strong> $C \equiv (P+k) \pmod{26}$</p>
+                        <p class="text-left"><strong class="text-indigo-600">Dekripsi:</strong> $P \equiv (C-k) \pmod{26}$</p>
+                    </div>
+                    <p class="text-gray-600 text-sm">
+                        Dengan $C$ = Ciphertext, $P$ = Plaintext, $K$ = Kunci, dan $\pmod{26}$ merupakan jumlah alphabet keseluruhan. (Nurdiansyah, 2024)
+                    </p>
+                </div>
+                
+                <!-- Kartu 2: Implementasi Manual (Warna Ungu) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-purple transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-purple mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2z"></path></svg>
+                        Implementasi Manual
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">
+                        Secara manual siswa cukup memiliki alfabet tertulis dan menggeser huruf sesuai kunci. Karena pola tetap dan mudah divisualisasikan ini efektif untuk demonstrasi kelas dan latihan pemahaman modularitas.
+                    </p>
+                    
+                    <!-- Tabel Pemetaan Alfabet (Contoh Kunci k=3) -->
+                    <div class="overflow-x-auto border rounded-lg shadow-inner">
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                    <th>F</th>
+                                    <th>G</th>
+                                    <th>H</th>
+                                    <th>I</th>
+                                    <th>J</th>
+                                    <th>K</th>
+                                    <th>L</th>
+                                    <th>M</th>
+                                    <th>N</th>
+                                    <th>O</th>
+                                    <th>P</th>
+                                    <th>Q</th>
+                                    <th>R</th>
+                                    <th>S</th>
+                                    <th>T</th>
+                                    <th>U</th>
+                                    <th>V</th>
+                                    <th>W</th>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>Z</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="key-row">
+                                    <td>D</td>
+                                    <td>E</td>
+                                    <td>F</td>
+                                    <td>G</td>
+                                    <td>H</td>
+                                    <td>I</td>
+                                    <td>J</td>
+                                    <td>K</td>
+                                    <td>L</td>
+                                    <td>M</td>
+                                    <td>N</td>
+                                    <td>O</td>
+                                    <td>P</td>
+                                    <td>Q</td>
+                                    <td>R</td>
+                                    <td>S</td>
+                                    <td>T</td>
+                                    <td>U</td>
+                                    <td>V</td>
+                                    <td>W</td>
+                                    <td>X</td>
+                                    <td>Y</td>
+                                    <td>Z</td>
+                                    <td>A</td>
+                                    <td>B</td>
+                                    <td>C</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Kartu 3: Implementasi Komputer (Warna Hijau) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-success transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-success mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1l-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Implementasi Komputer
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Kode semu Caesar Cipher pada dasarnya sangat sederhana. Program hanya perlu melakukan <strong class="highlight-bold">perulangan untuk membaca setiap karakter</strong> dalam teks. Jika karakter tersebut adalah huruf, program menghitung posisi huruf itu dalam alfabet (0–25), kemudian menambahkan atau mengurangi nilai kunci ($k$), dan setelah itu mengambil hasilnya dengan <strong class="highlight-bold">operasi modulo 26</strong>.
+                    </p>
+                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">
+                        Setelah mendapatkan posisi baru, huruf dikonversi kembali menjadi karakter alfabet yang sesuai. Jika karakter bukan huruf (spasi atau tanda baca), program cukup membiarkannya tanpa perubahan. Karena semua langkahnya sederhana dan dikerjakan sekali jalan dari awal sampai akhir teks, prosesnya <strong class="text-success font-semibold">sangat cepat dan hampir tidak membutuhkan memori tambahan</strong>. Inilah sebabnya implementasinya bisa ditulis hanya dalam beberapa baris kode dan sering dipakai sebagai contoh enkripsi dasar bagi pemula.
+                    </p>
+                </div>
+
+                <!-- Kartu 4: Kelebihan Edukasi dan Praktis (Warna Accent) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-accent transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-accent mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M5 15V9a2 2 0 012-2h2.5L12 5l2.5 2H17a2 2 0 012 2v6m1-2h-2.5m-11 0h2.5"></path></svg>
+                        Kelebihan Edukasi dan Praktis
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Karena sifatnya dapat diprediksi secara pasti berdasarkan kondisi awal dan transparan, Caesar ideal untuk mengajarkan konsep <strong class="highlight-bold">substitusi dan aritmetika modular</strong>.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 mt-3 text-gray-700 text-sm">
+                        <li><strong class="font-semibold text-primary">Prinsip Keamanan Dasar:</strong> Berfungsi sebagai sarana edukatif yang penting dalam memahami prinsip dasar keamanan informasi.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- BAGIAN BARU: III. Ketahanan terhadap Serangan Sederhana -->
+        <section id="ketahanan-serangan" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-primary pb-2">
+                III. Ketahanan terhadap Serangan Sederhana
+            </h2>
+            
+            <!-- PARAGRAF UTAMA -->
+            <p class="text-gray-700 italic mb-6">
+                Serangan sederhana adalah metode pemecahan sandi yang hanya mengandalkan pola alami yang muncul dalam teks. Secara khusus serangan ini mengandalkan frekuensi huruf pada teks. Sementara itu, pemecahan sandi tanpa kunci adalah usaha memecahkan pesan tanpa mengetahui kunci apa pun. Biasanya pemecahan ini diselesaikan dengan cara mencoba-coba semua kemungkinan kunci. Pada kriptografi Caesar Cipher yang mengunci pesan dengan cara pergeseran huruf, serangan ini dapat ditahan namun tidak sebaik algoritma modern lainnya, sebab pada dasarnya Caesar Cipher ini merupakan algoritma kriptografi klasik (Hidayat, Ridho, & Indra, 2024).
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Kartu 1: Ketahanan terhadap Serangan Sederhana (Warning/Kuning) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-warning transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-warning mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.3 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Ketahanan Terhadap Serangan Sederhana
+                    </h3>
+                    <!-- KOREKSI: Menghilangkan semua tanda bintang -->
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        Pesan yang telah dienkripsi menggunakan algoritma Caesar Cipher ini akan menghasilkan <strong class="highlight-bold">pesan baru atau <em>ciphertext</em> yang terlihat aneh dan abstrak</strong>. Hal ini karena pada dasarnya pesan awal atau <em>plaintext</em> akan ditulis ulang dengan huruf yang bergeser beberapa posisi di bawah alfabet tetap berdasarkan kuncinya (<em>key</em>) (Nurdiansyah, 2024). 
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mt-2 text-sm">
+                        Bagi orang awam yang tidak memiliki pemahaman apa pun terkait kriptografi Caesar Cipher ini maka, pesan yang sudah dienkripsi tersebut akan terlihat bukan sebagai bahasa alami. Oleh karena itu, ketahanan Caesar Cipher terhadap serangan sederhana <em class="text-warning font-semibold">lumayan aman</em>.
+                    </p>
+                </div>
+
+                <!-- Kartu 2: Pemecahan Sandi Tanpa Kunci (Success/Hijau) -->
+                <div class="bg-card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-success transform hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-success mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 0012 5.636V5a1 1 0 00-2 0v.636A9 9 0 005.636 12H5a1 1 0 000 2h.636A9 9 0 0012 18.364V19a1 1 0 002 0v-.636A9 9 0 0018.364 12H19a1 1 0 000-2h-.636z"></path></svg>
+                        Pemecahan Sandi Tanpa Kunci
+                    </h3>
+                    <!-- KOREKSI: Menghilangkan semua tanda bintang -->
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        Pemecahan sandi atau proses dekripsi pada Caesar Cipher membutuhkan kunci (<em>key</em>) pergeseran hurufnya. Jika sudah diketahui maka dapat diketahui juga pasangan <em>plaintext</em> - <em>ciphertext</em> nya, sehingga dapat diketahui dengan segera arti dari pesannya (Ningsih, Salsabila, Hutapea, Santika, & Gunawan, 2024).
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mt-2 text-sm">
+                        Namun, jika kuncinya tidak diketahui maka pemecahan harus dilakukan dengan cara mencoba-coba satu persatu kunci. Pada tahap inilah proses pemecahan akan membutuhkan <strong class="highlight-bold">lebih banyak waktu</strong>, terlebih jika kuncinya adalah pergeseran yang cukup jauh. Dengan demikian ketahanan Caesar Cipher untuk pemecahan sandi tanpa kunci <strong class="text-success font-semibold">cukup baik</strong> karena menyebabkan peningkatan penggunaan waktu.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian IV. Penerapan dalam Dunia Nyata -->
+        <section id="aplikasi-nyata" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-primary pb-2">
+                IV. Penerapan dalam Dunia Nyata
+            </h2>
+            <p class="text-lg text-gray-600 mb-6">Prinsip dasar Caesar Cipher sering <strong class="highlight-bold">digabungkan atau dimodifikasi</strong> untuk meningkatkan keamanan pada aplikasi praktis:</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Aplikasi 1: Bot Aplikasi Pesan Telegram -->
+                <div class="bg-card p-5 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 border-b-4 border-danger transform hover:scale-[1.02]">
+                    <h3 class="font-bold text-xl text-danger mb-2">Bot Aplikasi Pesan Telegram</h3>
+                    <p class="text-gray-600 text-sm">Penerapannya merupakan gabungan algoritma Caesar Cipher dan Transposisi Cipher untuk meningkatkan keamanan pesan. (Pramono, Luthfi, & Havatilla, 2024)</p>
+                </div>
+                <!-- Aplikasi 2: Fitur Aplikasi Chatting Whatsapp -->
+                <div class="bg-card p-5 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 border-b-4 border-danger transform hover:scale-[1.02]">
+                    <h3 class="font-bold text-xl text-danger mb-2">Fitur Aplikasi Chatting Whatsapp</h3>
+                    <p class="text-gray-600 text-sm">Pesan teks disandikan secara langsung dari <em>plaintext</em> menjadi <em>ciphertext</em> untuk menjaga kerahasiaan. (Andrea, Wardana, Wanandi, & Ikhwan, 2023)</p>
+                </div>
+                <!-- Aplikasi 3: Sistem Pengamanan Pesan Berbasis Web di Desa -->
+                <div class="bg-card p-5 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 border-b-4 border-danger transform hover:scale-[1.02]">
+                    <h3 class="font-bold text-xl text-danger mb-2">Sistem Pengamanan Pesan Berbasis Web di Desa</h3>
+                    <p class="text-gray-600 text-sm">Digunakan untuk menjaga kerahasiaan pengiriman pesan administratif berbasis web. (Aprianti & Marsehan, 2025)</p>
+                </div>
+            </div>
+            
+            <!-- CATATAN: Kalimat di bawah ini telah dihapus sesuai permintaan pengguna -->
+            <!-- <p class="mt-8 text-gray-700 italic">
+                Secara umum, ketahanan Caesar Cipher terhadap serangan sederhana dapat ditahan namun tidak sebaik algoritma modern lainnya (Hidayat, Ridho, & Indra, 2024).
+            </p> -->
+        </section>
+
+        <!-- BAGIAN V. Kesimpulan Akhir (Dihapus sesuai permintaan pengguna) -->
+
+        <!-- Bagian VI. Referensi -->
+        <section id="referensi" class="mt-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-4 border-primary pb-2">
+                V. Referensi
+            </h2>
+            <ul class="reference-list text-gray-700 text-sm">
+                <li>Andrea, K., Wardana, A., Wanandi, B. S., & Ikhwan, A. (2023). Penerapan Kriptografi Caesar Cipher Pada Fitur Aplikasi Chatting Whatsapp. <em>Jurnal Hasi Penelitian Dan Pengkajian Ilmiah Eksakta</em>, 6-11.</li>
+                <li>Aprianti, E., & Marsehan, A. (2025). Analysis dan Implementasi Algoritma Caesar Chiper Dalam Pengamanan Pesan Teks Berbasis Web di Desa. <em>Digital Transformation Technology (Digitech)</em>, 191-196.</li>
+                <li>Asiani, R. W., & Yanti, I. (2022). Penerapan Kriptografi Caesar Cipher Dan Hill Cipher dalam Pengiriman Pesan Rahasia Sebagai Media Pembelajaran Matematika Realistik Pada Materi Modulo. <em>Baitul ‘Ulum: Jurnal Ilmu Perpustakaan dan Informasi</em>, 79-97.</li>
+                <li>Hernandez, A. (2022). How I REACTO to Algos: Caesar Cipher. <em>DEV</em>.</li>
+                <li>Hidayat, M. F., Ridho, M., & Indra, Z. (2024). Implementasi Metode Caesar Chiper Dalam Kriptografi Untuk Keamanan Data Pesan. <em>QISTINA: Jurnal Multidisiplin Indonesia</em>, 1296-1302.</li>
+                <li>Ningsih, U. J., Salsabila, S., Hutapea, I., Santika, D., & Gunawan, I. (2024). Pendekripsian Caesar Chiper Dengan Menggunakan Teknik-Teknik Kriptanalisis. <em>Jurnal ILKOMEDIA</em>, 11-15.</li>
+                <li>Nurdiansyah, F. (2024). Penerapan Algoritma Caesar Cipher Pada Aplikasi Pengamanan Pesan Berbasis Website. <em>Jurnal Teknologi Informasi, Teori, Konsep dan Implentasi (JTI-TKI)</em>, 92-98.</li>
+                <li>Pramono, B. S., Luthfi, A., & Havatilla, D. R. (2024). Penerapan Kriptografi Caesar Cipher dan Transposisi Cipher Pada Bot Aplikasi Pesan Telegram. <em>Prosiding SAINTEK: Sains dan Teknologi</em>, 35-40.</li>
+                <li>Singh, S. (1999). <em>The code book: The science of secrecy from ancient Egypt to quantum cryptography</em>. Michigan: Fourth Estate.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 Kelompok 4 | Berdasarkan Analisis Kelebihan Kriptografi Caesar Cipher.</p>
+        </div>
+    </footer>
+
+    <!-- Script untuk merender formula LaTeX menggunakan MathJax -->
+    <script>
+        // Memuat MathJax untuk render notasi matematika
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        script.async = true;
+        document.head.appendChild(script);
+        
+        // Konfigurasi MathJax (optional, untuk memastikan render inline)
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
